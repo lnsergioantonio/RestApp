@@ -4,9 +4,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.lnsergioantonio.restapp.fragment.RequestFragment
+import com.lnsergioantonio.restapp.fragment.ResponseFragment
 
 private const val NUM_PAGES = 2
-const val PLAYER_FRAGMENT = 0
+const val REQUEST_FRAGMENT = 0
 
 class ViewPagerAdapter(fragment:FragmentActivity) : FragmentStateAdapter(fragment) {
 
@@ -14,10 +15,10 @@ class ViewPagerAdapter(fragment:FragmentActivity) : FragmentStateAdapter(fragmen
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 ->
+            REQUEST_FRAGMENT ->
                 RequestFragment.newInstance()
             else ->
-                RequestFragment.newInstance()
+                ResponseFragment.newInstance()
         }
     }
 }

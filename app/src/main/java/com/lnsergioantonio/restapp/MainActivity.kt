@@ -1,10 +1,14 @@
 package com.lnsergioantonio.restapp
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.lnsergioantonio.restapp.fragment.RequestFragment
+import com.lnsergioantonio.restapp.fragment.dialog.HEADERS_LIST
+import com.lnsergioantonio.restapp.fragment.dialog.HeadersItem
 import kotlinx.android.synthetic.main.activity_main.*
 
 private const val DEFAULT_POSITION = 0
@@ -13,8 +17,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initToolbar()
         initPager()
     }
+
+    private fun initToolbar() {
+        setSupportActionBar(toolbar)
+    }
+
     private fun initPager() {
         viewPager.adapter = ViewPagerAdapter(this)
 
@@ -28,5 +38,16 @@ class MainActivity : AppCompatActivity() {
             tab.text = getString(R.string.request)
         else
             tab.text = getString(R.string.history)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val currentFragment: Fragment? = supportFragmentManager.findFragmentById(REQUEST_FRAGMENT)
+        if (currentFragment is RequestFragment){
+            data?.let { noNullData ->
+                val headersList : List<HeadersItem> = noNullData.getParcelableArrayListExtra(HEADERS_LIST) ?: emptyList()
+                currentFragment.updateHeadersList(headersList)
+            }
+        }
     }
 }

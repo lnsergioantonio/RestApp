@@ -64,6 +64,8 @@ dependencies {
     implementation 'androidx.fragment:fragment-ktx:1.2.5'
     implementation 'org.jetbrains.kotlin:kotlin-reflect:1.4.20'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.2'
 
     // database
     def room_version = "2.2.6"

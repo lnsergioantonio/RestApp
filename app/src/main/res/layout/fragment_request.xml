@@ -14,6 +14,7 @@
         android:layout_marginStart="4dp"
         android:entries="@array/method_request"
         android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toStartOf="@+id/inputRepeat"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -29,7 +30,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Number of multiple requests" />
+            android:hint="@string/number_multiple_requests" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -48,23 +49,24 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonHeaders"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Headers"
+        android:text="@string/headers"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputUrl" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonBody"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Body"
+        android:text="@string/body"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonHeaders" />
 
     <TextView
         android:id="@+id/textView"
@@ -72,8 +74,18 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
-        android:text="Method"
+        android:text="@string/method"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonSend"
+        android:backgroundTint="@color/design_default_color_secondary_variant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/send"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonBody" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.EditText
+import android.widget.Spinner
 import androidx.annotation.LayoutRes
 import com.google.android.material.textfield.TextInputEditText
 
@@ -24,3 +26,15 @@ val TextInputEditText.value
 
 val EditText.value
     get() = text.toString()
+
+inline fun Spinner.onItemSelectedChanged(crossinline onItemSelected:(Int)->Unit){
+    onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
+            onItemSelected(pos)
+        }
+
+        override fun onNothingSelected(parent: AdapterView<*>?) {
+            TODO("Not yet implemented")
+        }
+    }
+}

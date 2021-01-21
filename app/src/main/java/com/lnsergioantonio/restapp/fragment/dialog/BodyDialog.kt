@@ -2,7 +2,9 @@ package com.lnsergioantonio.restapp.fragment.dialog
 
 import android.app.Dialog
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
@@ -14,8 +16,7 @@ import com.lnsergioantonio.restapp.ext.value
 const val TAG_BODY_DIALOG = "BodyDialog"
 
 class BodyDialog(private val listener: (String, String) -> Unit) : DialogFragment() {
-    private lateinit var inputBody: EditText
-    private lateinit var inputBodyType: Spinner
+
     private var positionItem = 0
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -23,14 +24,19 @@ class BodyDialog(private val listener: (String, String) -> Unit) : DialogFragmen
             val builder = AlertDialog.Builder(it)
             val inflater = requireActivity().layoutInflater
             val rootView = inflater.inflate(R.layout.dialog_headers, null)
-            inputBody = rootView.findViewById(R.id.inputBody)
-            inputBodyType = rootView.findViewById(R.id.bodyType)
+
+            val bodyType = resources.getStringArray(R.array.body_type)
+            val inputBody: EditText = rootView.findViewById(R.id.inputBody)
+            val inputBodyType: Spinner = rootView.findViewById(R.id.bodyType)
+
+            inputBodyType.onItemSelectedChanged { position ->
+                positionItem = position
+            }
 
             builder.setView(rootView)
-                    .setView(R.layout.dialog_headers)
                     .setTitle(R.string.title_add_body)
                     .setPositiveButton(R.string.add_body) { _, _ ->
-
+                        listener.invoke(inputBody.value, bodyType[positionItem])
                     }
                     .setNegativeButton(R.string.cancel) { dialog, id ->
                         dialog.cancel()
@@ -43,23 +49,5 @@ class BodyDialog(private val listener: (String, String) -> Unit) : DialogFragmen
         val prevDialog = parentFragmentManager.findFragmentByTag(TAG_BODY_DIALOG)
         if (prevDialog == null)
             show(parentFragmentManager, TAG_BODY_DIALOG)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        val d = dialog as AlertDialog?
-        if (d != null) {
-            val positiveButton: Button = d.getButton(Dialog.BUTTON_POSITIVE) as Button
-
-            val bodyType = resources.getStringArray(R.array.body_type)
-
-            positiveButton.setOnClickListener {
-                listener.invoke(inputBody.value, bodyType[positionItem])
-                d.dismiss()
-            }
-            inputBodyType.onItemSelectedChanged { position ->
-                positionItem = position
-            }
-        }
     }
 }

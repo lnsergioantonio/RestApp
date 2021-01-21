@@ -1,4 +1,4 @@
-package com.lnsergioantonio.restapp.fragment.dialog
+package com.lnsergioantonio.restapp.ui.adapter
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

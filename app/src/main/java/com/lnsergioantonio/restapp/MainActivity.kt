@@ -6,9 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.lnsergioantonio.restapp.fragment.RequestFragment
-import com.lnsergioantonio.restapp.fragment.dialog.HEADERS_LIST
-import com.lnsergioantonio.restapp.fragment.dialog.HeadersItem
+import com.lnsergioantonio.restapp.ui.HEADERS_LIST
+import com.lnsergioantonio.restapp.ui.fragment.RequestFragment
+import com.lnsergioantonio.restapp.ui.adapter.HeadersItem
 import kotlinx.android.synthetic.main.activity_main.*
 
 private const val DEFAULT_POSITION = 0

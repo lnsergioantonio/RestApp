@@ -1,4 +1,4 @@
-package com.lnsergioantonio.restapp.fragment
+package com.lnsergioantonio.restapp.ui.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -1,4 +1,4 @@
-package com.lnsergioantonio.restapp.fragment
+package com.lnsergioantonio.restapp.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.lnsergioantonio.restapp.R
-import com.lnsergioantonio.restapp.fragment.dialog.*
+import com.lnsergioantonio.restapp.ui.AddHeadersActivity
+import com.lnsergioantonio.restapp.ui.HEADERS_LIST
+import com.lnsergioantonio.restapp.ui.fragment.dialog.*
+import com.lnsergioantonio.restapp.ui.adapter.HeadersItem
 import kotlinx.android.synthetic.main.fragment_request.*
 
 class RequestFragment : Fragment() {

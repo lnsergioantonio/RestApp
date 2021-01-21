@@ -3,8 +3,8 @@ package com.lnsergioantonio.restapp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.lnsergioantonio.restapp.fragment.RequestFragment
-import com.lnsergioantonio.restapp.fragment.ResponseFragment
+import com.lnsergioantonio.restapp.ui.fragment.RequestFragment
+import com.lnsergioantonio.restapp.ui.fragment.ResponseFragment
 
 private const val NUM_PAGES = 2
 const val REQUEST_FRAGMENT = 0

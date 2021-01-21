@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RestApp">
         <activity
-            android:name=".fragment.dialog.AddHeadersActivity"
+            android:name="com.lnsergioantonio.restapp.ui.fragment.dialog.AddHeadersActivity"
             android:label="@string/title_activity_add_headers"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>

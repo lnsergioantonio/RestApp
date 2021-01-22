@@ -8,41 +8,43 @@
     tools:context=".ui.fragment.RequestFragment">
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/spinnerMethod"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="4dp"
         android:entries="@array/method_request"
         android:spinnerMode="dropdown"
-        app:layout_constraintEnd_toStartOf="@+id/inputRepeat"
+        app:layout_constraintEnd_toStartOf="@+id/layerRepeat"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputRepeat"
+        android:id="@+id/layerRepeat"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/spinner"
+        app:layout_constraintBottom_toBottomOf="@+id/spinnerMethod"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/spinner"
-        app:layout_constraintTop_toTopOf="@+id/spinner">
+        app:layout_constraintStart_toEndOf="@+id/spinnerMethod"
+        app:layout_constraintTop_toTopOf="@+id/spinnerMethod">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/number_multiple_requests" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputUrl"
+        android:id="@+id/layerUrl"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputRepeat">
+        app:layout_constraintTop_toBottomOf="@+id/layerRepeat">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/inputUrl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/enter_request_url" />
@@ -56,7 +58,7 @@
         android:text="@string/headers"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputUrl" />
+        app:layout_constraintTop_toBottomOf="@+id/layerUrl" />
 
     <Button
         android:id="@+id/buttonBody"

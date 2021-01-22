@@ -8,9 +8,8 @@ import java.util.concurrent.TimeUnit
 
 private const val timeOut = 20L //20Secs//
 
-fun createNetworkClient(baseUrl: String, debug: Boolean = false) =
+fun createNetworkClient(debug: Boolean = false) =
     retrofitClient(
-        baseUrl,
         httpClient(debug)
     )
 
@@ -27,9 +26,9 @@ private fun httpClient(debug: Boolean): OkHttpClient {
     }.build()
 }
 
-private fun retrofitClient(baseUrl: String, httpClient: OkHttpClient): Retrofit =
+private fun retrofitClient(httpClient: OkHttpClient): Retrofit =
     Retrofit.Builder()
-        //.baseUrl(baseUrl) // colocar luego esto en el config
+        .baseUrl("http://localhost/") // colocar luego esto en el config
         .addConverterFactory(MoshiConverterFactory.create())
         .client(httpClient) // tratar de hacer esto un factory del client
         .build()

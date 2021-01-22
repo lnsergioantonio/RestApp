@@ -1,6 +1,5 @@
 package com.lnsergioantonio.restapp.domain
 
-import com.lnsergioantonio.restapp.BuildConfig
 import com.lnsergioantonio.restapp.data.RequestEntity
 import com.lnsergioantonio.restapp.domain.base.NetworkConnectionException
 import com.lnsergioantonio.restapp.domain.base.State
@@ -60,9 +59,9 @@ class SendRequestRepositoryImpl(
     private fun getRequestBody(body: String, bodyType: String): RequestBody {
         return when (bodyType) {
             JSON ->
-                bodyType.toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
+                body.toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
             else ->
-                bodyType.toRequestBody("text/plain; charset=utf-8".toMediaTypeOrNull())
+                body.toRequestBody("text/plain; charset=utf-8".toMediaTypeOrNull())
         }
     }
 }

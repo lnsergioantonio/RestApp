@@ -3,6 +3,8 @@
     package="com.lnsergioantonio.restapp">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RestApp">
         <activity
-            android:name="com.lnsergioantonio.restapp.ui.fragment.dialog.AddHeadersActivity"
+            android:name=".ui.AddHeadersActivity"
             android:label="@string/title_activity_add_headers"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>

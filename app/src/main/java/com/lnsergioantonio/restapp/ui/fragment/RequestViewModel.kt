@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lnsergioantonio.restapp.domain.SendRequestUseCase
+import com.lnsergioantonio.restapp.domain.base.State
 
 class RequestViewModel(private val sendRequestUseCase: SendRequestUseCase) : ViewModel() {
 
@@ -21,8 +22,14 @@ class RequestViewModel(private val sendRequestUseCase: SendRequestUseCase) : Vie
 
     fun sendRequest() {
         liveDataRequest.value?.let { params ->
-            sendRequestUseCase.invoke(viewModelScope, params.getParam()) {
-                Log.d("hasdhgasfd", "   :)")
+            sendRequestUseCase.invoke(viewModelScope, params.getParam()) {res->
+                res.forEach { result ->
+                    when(result){
+                        is State.Success -> Log.d("response -> ", result.data.toString())
+                        is State.Failure -> Log.d("response -> ", result.message)
+                        is State.Progress -> Log.d("response -> ", "isLoading")
+                    }
+                }
             }
         }
     }

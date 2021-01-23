@@ -5,20 +5,19 @@ import com.lnsergioantonio.restapp.domain.base.NetworkConnectionException
 import com.lnsergioantonio.restapp.domain.base.State
 import com.lnsergioantonio.restapp.domain.model.ResponseEntity
 import com.lnsergioantonio.restapp.ext.NetworkHandler
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import java.lang.Exception
 
 interface SendRequestRepository {
-    fun fetchData(
+    suspend fun fetchData(
         headerList: Map<String,String>,
         url: String,
         method: String,
         body: String,
         bodyType: String
-    ): Flow<State<ResponseEntity>>
+    ):State<ResponseEntity>
 }
 
 class SendRequestRepositoryImpl(
@@ -26,15 +25,19 @@ class SendRequestRepositoryImpl(
     private val networkSource: NetworkSource
 ) : SendRequestRepository {
 
-    override fun fetchData(
+    override suspend fun fetchData(
         headerList: Map<String,String>,
         url: String,
         method: String,
         body: String,
         bodyType: String
-    ) = flow {
-        val result = fetch(headerList, url, method, body, bodyType)
-        emit(result)
+    ): State<ResponseEntity> {
+        return try {
+            fetch(headerList, url, method, body, bodyType)
+        }catch (e:Exception){
+            State.Failure(e)
+        }
+        //emit(result)
     }
 
     private suspend fun fetch(

@@ -3,35 +3,117 @@ package com.lnsergioantonio.restapp.domain
 import com.lnsergioantonio.restapp.domain.base.State
 import com.lnsergioantonio.restapp.domain.model.ResponseEntity
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class SendRequestUseCase(private val repository: SendRequestRepository) {
-
     fun invoke(
             scope: CoroutineScope,
             params: Params,
+            //onResult: (State<ResponseEntity>) -> Unit = {}
+            //onResult: (MutableList<Flow<State<ResponseEntity>>>) -> Unit = {}
             onResult: (MutableList<State<ResponseEntity>>) -> Unit = {}
     ) {
         val allResponseFromApi = mutableListOf<State<ResponseEntity>>()
+        val callFromApi = mutableListOf<State<ResponseEntity>>()
+        //val callFromApi = mutableListOf<Flow<State<ResponseEntity>>>()
         scope.launch {
-            for (i in 1..params.numberCalls) {
-                //val backgroundJob = scope.async { run(params) }
-                //callFromApi.add(backgroundJob)
-                //val response: Flow<State<ResponseEntity>> = backgroundJob.await()
-                withContext(scope.coroutineContext) {
+            val jobs = Array(params.numberCalls){
+                scope.async {
                     run(params)
-                }.collect {
-                    allResponseFromApi.add(it)
                 }
             }
-            onResult(allResponseFromApi)
+            jobs.forEach {
+                //callFromApi.add() }
+                callFromApi.add(it.await())
+            }
+            onResult(callFromApi)
         }
+
+        /*for (i in 1..params.numberCalls){
+            scope.launch {
+                    val backgroundJob = async {
+                        run(params)
+                    }
+                    backgroundJob
+                            .await()
+                            .onStart {
+                                emit(State.Progress(isLoading = true))
+                            }.catch {
+                                emit(State.Failure(it))
+                            }
+                            .collect {
+                                callFromApi.add(it)
+                            }
+
+                    //callFromApi.add(backgroundJob.await())
+
+                    //val response: Flow<State<ResponseEntity>> = backgroundJob.await()
+                    *//*withContext(scope.coroutineContext) {
+                        run(params)
+                    }.collect {
+                        allResponseFromApi.add(it)
+                    }*//*
+                onResult(callFromApi)
+            }
+        }*/
+        /*scope.launch {
+            val backgroundJob = async {
+                run(params)
+            }
+            backgroundJob
+                    .await()
+                    .collect {
+                        callFromApi.add(it)
+                    }
+
+            //callFromApi.add(backgroundJob.await())
+
+            //val response: Flow<State<ResponseEntity>> = backgroundJob.await()
+            *//*withContext(scope.coroutineContext) {
+                run(params)
+            }.collect {
+                allResponseFromApi.add(it)
+            }*//*
+                    backgroundJob.await().shareIn(scope, SharingStarted.Eagerly)
+            onResult(callFromApi)*/
+        //resultShared(params.numberCalls, params, scope, onResult)
+
+        /*val resultShared = MutableSharedFlow<State<ResponseEntity>>(params.numberCalls)
+        (1 .. params.numberCalls).forEach {
+            scope.launch {
+                val backgroundJob = async {
+                    run(params)
+                }
+                backgroundJob.await().shareIn(scope, SharingStarted.Eagerly).collect {
+                    callFromApi.add(it)
+                }
+                onResult(callFromApi)
+            }
+        }*/
     }
 
-    private fun run(params: Params): Flow<State<ResponseEntity>> {
+    /*private fun resultShared(counter: Int, params: Params, scope: CoroutineScope, onResult: (State<ResponseEntity>) -> Unit){
+        val resultShared = MutableSharedFlow<State<ResponseEntity>>(params.numberCalls)
+        scope.launch {
+            (1 .. counter).forEach {
+                val backgroundJob = async {
+                    run(params).collect {
+                                resultShared.emit(it)
+                            }
+                }.await()
+                resultShared.collect { response ->
+                    onResult(response)
+                }
+            }
+            /*resultShared.collect {
+                onResult(it)
+            }*/
+        }
+    }*/
+
+    private suspend fun run(params: Params): State<ResponseEntity> {
         return repository.fetchData(params.headerList, params.url, params.method, params.body, params.bodyType)
     }
 

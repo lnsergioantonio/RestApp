@@ -10,6 +10,8 @@ import com.lnsergioantonio.restapp.BuildConfig
 import com.lnsergioantonio.restapp.R
 import com.lnsergioantonio.restapp.data.AppService
 import com.lnsergioantonio.restapp.data.createNetworkClient
+import com.lnsergioantonio.restapp.data.local.provideDatabase
+import com.lnsergioantonio.restapp.data.local.provideRequestResponseDao
 import com.lnsergioantonio.restapp.domain.NetworkSourceImpl
 import com.lnsergioantonio.restapp.domain.SendRequestRepositoryImpl
 import com.lnsergioantonio.restapp.domain.SendRequestUseCase
@@ -58,11 +60,14 @@ class RequestFragment : Fragment() {
     }
 
     private fun initViewModel() {
+        val database = provideDatabase(requireActivity().application)
+        val dao = provideRequestResponseDao(database)
+
         val apiService = createNetworkClient(BuildConfig.DEBUG).create(AppService::class.java)
         val networkHandler = NetworkHandler(requireContext())
         val networkSource = NetworkSourceImpl(apiService)
 
-        val repository = SendRequestRepositoryImpl(networkHandler, networkSource)
+        val repository = SendRequestRepositoryImpl(networkHandler, networkSource, dao)
         val useCase = SendRequestUseCase(repository)
 
         viewModel = RequestViewModel(useCase)

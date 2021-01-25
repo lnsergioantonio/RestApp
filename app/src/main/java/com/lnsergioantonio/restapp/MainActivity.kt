@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.lnsergioantonio.restapp.data.local.provideDatabase
 import com.lnsergioantonio.restapp.ui.HEADERS_LIST
 import com.lnsergioantonio.restapp.ui.fragment.RequestFragment
 import com.lnsergioantonio.restapp.ui.adapter.HeadersItem

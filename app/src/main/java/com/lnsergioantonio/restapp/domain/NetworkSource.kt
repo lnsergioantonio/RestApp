@@ -1,16 +1,10 @@
 package com.lnsergioantonio.restapp.domain
 
-import android.util.Log
 import com.lnsergioantonio.restapp.data.AppService
 import com.lnsergioantonio.restapp.data.RequestEntity
 import com.lnsergioantonio.restapp.domain.model.ResponseEntity
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
 import okhttp3.ResponseBody
-import okio.Buffer
 import retrofit2.Response
-import java.io.EOFException
-
 
 interface NetworkSource {
     suspend fun fetchData(request: RequestEntity): ResponseEntity
@@ -33,17 +27,21 @@ private fun Response<ResponseBody>.toDomain(): ResponseEntity {
     val reqTime: Long = raw().sentRequestAtMillis
     val resTime: Long = raw().receivedResponseAtMillis
     var rawResponseBody = ""
+    var error = ""
 
-    rawResponseBody = if (isSuccessful)
-        body()?.string() ?: ""
+    if (isSuccessful)
+        rawResponseBody = body()?.string() ?: ""
     else
-        errorBody()?.string() ?: ""
+        error = errorBody()?.string() ?: ""
 
     return ResponseEntity(
             statusCode = code(),
             time = "${resTime - reqTime} ms",
             size = headers().size,
             body = rawResponseBody,
-            isSuccessful = isSuccessful
+            isSuccessful = isSuccessful,
+            reqTime = reqTime,
+            resTime = resTime,
+            error = error
     )
 }

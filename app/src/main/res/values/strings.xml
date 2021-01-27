@@ -41,5 +41,6 @@
     <string name="send">Send</string>
     <string name="method">Method</string>
     <string name="number_multiple_requests">Number of requests</string>
+    <string name="response">Response</string>
 
 </resources>

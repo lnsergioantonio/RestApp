@@ -1,4 +1,4 @@
-package com.lnsergioantonio.restapp.ui.adapter
+package com.lnsergioantonio.restapp.ui.header.adapter
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

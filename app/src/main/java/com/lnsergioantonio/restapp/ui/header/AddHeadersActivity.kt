@@ -1,11 +1,11 @@
-package com.lnsergioantonio.restapp.ui
+package com.lnsergioantonio.restapp.ui.header
 
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.lnsergioantonio.restapp.R
 import com.lnsergioantonio.restapp.ui.fragment.dialog.HeadersAdapter
-import com.lnsergioantonio.restapp.ui.adapter.HeadersItem
+import com.lnsergioantonio.restapp.ui.header.adapter.HeadersItem
 import kotlinx.android.synthetic.main.activity_add_headers.*
 
 const val HEADERS_LIST = "HEADERS_LIST"

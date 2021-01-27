@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RestApp">
         <activity
-            android:name=".ui.AddHeadersActivity"
+            android:name=".ui.header.AddHeadersActivity"
             android:label="@string/title_activity_add_headers"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -6,10 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.lnsergioantonio.restapp.data.local.provideDatabase
-import com.lnsergioantonio.restapp.ui.HEADERS_LIST
 import com.lnsergioantonio.restapp.ui.fragment.RequestFragment
-import com.lnsergioantonio.restapp.ui.adapter.HeadersItem
+import com.lnsergioantonio.restapp.ui.header.HEADERS_LIST
+import com.lnsergioantonio.restapp.ui.header.adapter.HeadersItem
 import kotlinx.android.synthetic.main.activity_main.*
 
 private const val DEFAULT_POSITION = 0
@@ -38,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         if (DEFAULT_POSITION == position)
             tab.text = getString(R.string.request)
         else
-            tab.text = getString(R.string.history)
+            tab.text = getString(R.string.response)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

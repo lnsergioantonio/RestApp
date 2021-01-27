@@ -18,11 +18,11 @@ import com.lnsergioantonio.restapp.domain.SendRequestUseCase
 import com.lnsergioantonio.restapp.ext.NetworkHandler
 import com.lnsergioantonio.restapp.ext.onItemSelectedChanged
 import com.lnsergioantonio.restapp.ext.value
-import com.lnsergioantonio.restapp.ui.AddHeadersActivity
-import com.lnsergioantonio.restapp.ui.HEADERS_LIST
-import com.lnsergioantonio.restapp.ui.RESULT_HEADERS_LIST
 import com.lnsergioantonio.restapp.ui.fragment.dialog.*
-import com.lnsergioantonio.restapp.ui.adapter.HeadersItem
+import com.lnsergioantonio.restapp.ui.header.AddHeadersActivity
+import com.lnsergioantonio.restapp.ui.header.HEADERS_LIST
+import com.lnsergioantonio.restapp.ui.header.RESULT_HEADERS_LIST
+import com.lnsergioantonio.restapp.ui.header.adapter.HeadersItem
 import kotlinx.android.synthetic.main.fragment_request.*
 
 class RequestFragment : Fragment() {

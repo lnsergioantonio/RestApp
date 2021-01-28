@@ -6,16 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.lnsergioantonio.restapp.BuildConfig
+import com.lnsergioantonio.restapp.App
 import com.lnsergioantonio.restapp.R
-import com.lnsergioantonio.restapp.data.AppService
-import com.lnsergioantonio.restapp.data.createNetworkClient
-import com.lnsergioantonio.restapp.data.local.provideDatabase
-import com.lnsergioantonio.restapp.data.local.provideRequestResponseDao
-import com.lnsergioantonio.restapp.domain.NetworkSourceImpl
-import com.lnsergioantonio.restapp.domain.SendRequestRepositoryImpl
-import com.lnsergioantonio.restapp.domain.SendRequestUseCase
-import com.lnsergioantonio.restapp.ext.NetworkHandler
+import com.lnsergioantonio.restapp.di.RequestContainer
 import com.lnsergioantonio.restapp.ext.onItemSelectedChanged
 import com.lnsergioantonio.restapp.ext.value
 import com.lnsergioantonio.restapp.ui.fragment.dialog.*
@@ -60,7 +53,7 @@ class RequestFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        val database = provideDatabase(requireActivity().application)
+        /*val database = provideDatabase(requireActivity().application)
         val dao = provideRequestResponseDao(database)
 
         val apiService = createNetworkClient(BuildConfig.DEBUG).create(AppService::class.java)
@@ -70,7 +63,9 @@ class RequestFragment : Fragment() {
         val repository = SendRequestRepositoryImpl(networkHandler, networkSource, dao)
         val useCase = SendRequestUseCase(repository)
 
-        viewModel = RequestViewModel(useCase)
+        viewModel = RequestViewModel(useCase)*/
+        val appContainer = (requireActivity().application as App).appContainer
+        viewModel = RequestContainer(appContainer.sendRequestRepository).viewModel
     }
 
     private fun startHeaderScreen() {

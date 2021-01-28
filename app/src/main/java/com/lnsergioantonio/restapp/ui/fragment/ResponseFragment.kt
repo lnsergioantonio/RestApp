@@ -5,8 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.lnsergioantonio.restapp.App
 import com.lnsergioantonio.restapp.R
-import com.lnsergioantonio.restapp.domain.*
+import com.lnsergioantonio.restapp.di.ResponseContainer
 
 class ResponseFragment : Fragment() {
 
@@ -26,17 +27,12 @@ class ResponseFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        /*val database = provideDatabase(requireActivity().application)
-        val dao = provideRequestResponseDao(database)*/
-
-        val repository = GetResponseRepositoryImpl()
-        val useCase = GetResponseUseCase(repository)
-
-        viewModel = ResponseViewModel(useCase)
+        val appContainer = (requireActivity().application as App).appContainer
+        viewModel = ResponseContainer(appContainer.getResponseRepository).viewModel
     }
 
     private fun initRecyclerview() {
-        TODO("Not yet implemented")
+
     }
 
     companion object {

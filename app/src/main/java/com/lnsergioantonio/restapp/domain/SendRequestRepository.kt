@@ -62,7 +62,7 @@ class SendRequestRepositoryImpl(
                         time = result.time,
                         statusCode = result.statusCode,
                         size = result.size,
-                        responseBody = result.body,
+                        responseBody = result.responseBody,
                         isSuccessful = if (result.isSuccessful) 1 else 0,
                         error = result.error)
                 State.Success(result)

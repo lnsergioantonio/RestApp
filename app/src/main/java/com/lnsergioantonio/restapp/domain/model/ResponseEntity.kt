@@ -10,6 +10,8 @@ data class ResponseEntity(
         val size: Int,
         val requestBody: String,
         val responseBody: String,
-        val isSuccessful: Int,
-        val error: String
+        val isSuccessful: Boolean,
+        val error: String,
+        val reqTime: Long,
+        val resTime: Long
 )

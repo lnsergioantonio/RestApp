@@ -26,6 +26,9 @@ class NetworkSourceImpl(private val api: AppService) : NetworkSource {
 private fun Response<ResponseBody>.toDomain(): ResponseEntity {
     val reqTime: Long = raw().sentRequestAtMillis
     val resTime: Long = raw().receivedResponseAtMillis
+    val method: String = raw().request.method
+    val requestBody: String = raw().request.body.toString()
+    val uri: String = raw().request.url.encodedPath
     var rawResponseBody = ""
     var error = ""
 
@@ -38,10 +41,15 @@ private fun Response<ResponseBody>.toDomain(): ResponseEntity {
             statusCode = code(),
             time = "${resTime - reqTime} ms",
             size = headers().size,
-            body = rawResponseBody,
+            responseBody = rawResponseBody,
             isSuccessful = isSuccessful,
+            error = error,
+            description = "",
+            id = 0,
+            method = method,
+            requestBody = requestBody,
+            url = uri,
             reqTime = reqTime,
-            resTime = resTime,
-            error = error
+            resTime = resTime
     )
 }

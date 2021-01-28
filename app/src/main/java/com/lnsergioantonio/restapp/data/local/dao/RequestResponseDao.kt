@@ -2,6 +2,7 @@ package com.lnsergioantonio.restapp.data.local.dao
 
 import androidx.room.*
 import com.lnsergioantonio.restapp.data.local.entitues.RequestResponseEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface RequestResponseDao {
@@ -30,4 +31,9 @@ interface RequestResponseDao {
                        responseBody: String,
                        isSuccessful: Int,
                        error: String)
+
+    @Transaction
+    @Query("SELECT * FROM request_response")
+    fun getAllFlow(): Flow<List<RequestResponseEntity>?>
+
 }

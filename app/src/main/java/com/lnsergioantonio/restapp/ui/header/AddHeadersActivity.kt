@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.lnsergioantonio.restapp.R
-import com.lnsergioantonio.restapp.ui.fragment.dialog.HeadersAdapter
+import com.lnsergioantonio.restapp.ui.header.adapter.HeadersAdapter
 import com.lnsergioantonio.restapp.ui.header.adapter.HeadersItem
 import kotlinx.android.synthetic.main.activity_add_headers.*
 

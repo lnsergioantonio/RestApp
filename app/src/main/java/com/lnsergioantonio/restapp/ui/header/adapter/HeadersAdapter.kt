@@ -1,11 +1,10 @@
-package com.lnsergioantonio.restapp.ui.fragment.dialog
+package com.lnsergioantonio.restapp.ui.header.adapter
 
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.lnsergioantonio.restapp.R
 import com.lnsergioantonio.restapp.ext.inflate
-import com.lnsergioantonio.restapp.ui.header.adapter.HeadersItem
 import kotlinx.android.synthetic.main.item_header.view.*
 
 class HeadersAdapter : RecyclerView.Adapter<HeadersHolder>() {

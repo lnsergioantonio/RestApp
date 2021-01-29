@@ -8,6 +8,7 @@
     tools:context=".ui.fragment.ResponseFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/responseList"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_response"
         android:layout_width="match_parent"

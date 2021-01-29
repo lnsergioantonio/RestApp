@@ -2,6 +2,7 @@ package com.lnsergioantonio.restapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
@@ -46,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         if (currentFragment is RequestFragment){
             data?.let { noNullData ->
                 val headersList : List<HeadersItem> = noNullData.getParcelableArrayListExtra(HEADERS_LIST) ?: emptyList()
+                Log.i("headers -> ", headersList.toString())
                 currentFragment.updateHeadersList(headersList)
             }
         }

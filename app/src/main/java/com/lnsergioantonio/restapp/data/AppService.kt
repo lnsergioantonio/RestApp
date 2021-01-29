@@ -8,14 +8,14 @@ import retrofit2.http.*
 interface AppService {
     @GET
     suspend fun fetchGet(
-        @Url url: String,
-        @HeaderMap headers: Map<String, String>
+            @Url url: String,
+            @HeaderMap headers: Map<String, String>
     ): Response<ResponseBody>
 
     @POST
     suspend fun fetchPost(
-        @Url url: String,
-        @HeaderMap headers: Map<String, String>,
-        @Body requestBody: RequestBody
+            @Url url: String,
+            @HeaderMap headers: Map<String, String>,
+            @Body requestBody: RequestBody
     ): Response<ResponseBody>
 }

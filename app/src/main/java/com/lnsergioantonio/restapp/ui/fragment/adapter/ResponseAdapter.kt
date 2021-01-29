@@ -12,6 +12,7 @@ class ResponseAdapter : RecyclerView.Adapter<ResponseHolder>(){
 
     fun setResponseList(list: List<ResponseItem>){
         responseList = list
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResponseHolder {

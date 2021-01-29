@@ -17,15 +17,15 @@ abstract class UseCase<out Type, in Params> where Type : Any {
         params: Params,
         onResult: (State<Type>) -> Unit = {}
     ) {
-        val backgroundJob = scope.async {
-            run(params)
-                .onStart {
-                    emit(State.Progress(isLoading = true))
-                }.catch {
-                    emit(State.Failure(it))
-                }
-        }
         scope.launch {
+            val backgroundJob = scope.async {
+                run(params)
+                        .onStart {
+                            emit(State.Progress(isLoading = true))
+                        }.catch {
+                            emit(State.Failure(it))
+                        }
+            }
             backgroundJob.await().collect {
                 onResult(it)
             }

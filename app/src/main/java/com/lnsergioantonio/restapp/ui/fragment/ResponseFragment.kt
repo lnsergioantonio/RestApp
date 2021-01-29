@@ -1,17 +1,25 @@
 package com.lnsergioantonio.restapp.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.lnsergioantonio.restapp.App
 import com.lnsergioantonio.restapp.R
 import com.lnsergioantonio.restapp.di.ResponseContainer
+import com.lnsergioantonio.restapp.domain.base.State
+import com.lnsergioantonio.restapp.domain.model.ResponseEntity
+import com.lnsergioantonio.restapp.ui.fragment.adapter.ResponseAdapter
+import com.lnsergioantonio.restapp.ui.fragment.adapter.toItems
+import kotlinx.android.synthetic.main.fragment_response.*
 
 class ResponseFragment : Fragment() {
 
     private lateinit var viewModel: ResponseViewModel
+    private lateinit var adapter: ResponseAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,6 +32,12 @@ class ResponseFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initViewModel()
         initRecyclerview()
+        initObservers()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initData()
     }
 
     private fun initViewModel() {
@@ -32,7 +46,28 @@ class ResponseFragment : Fragment() {
     }
 
     private fun initRecyclerview() {
+        adapter = ResponseAdapter()
+        responseList.adapter = adapter
+    }
 
+    private fun initObservers() {
+        viewModel.responseState.observe(viewLifecycleOwner, Observer {
+            onChangeResponseList(it)
+        })
+    }
+
+    private fun initData(){
+        viewModel.getResponse()
+    }
+
+    private fun onChangeResponseList(stateResponseList: State<List<ResponseEntity>>?) {
+        stateResponseList?.let {noNullStateResponseList ->
+            when(noNullStateResponseList){
+                is State.Success -> adapter.setResponseList(noNullStateResponseList.data.toItems())
+                is State.Failure -> Log.e("ERROR -> ", noNullStateResponseList.message)
+                is State.Progress -> Log.e("Progress -> ", "... ")
+            }
+        }
     }
 
     companion object {

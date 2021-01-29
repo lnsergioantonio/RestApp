@@ -11,7 +11,7 @@ import com.lnsergioantonio.restapp.domain.NetworkSourceImpl
 import com.lnsergioantonio.restapp.domain.SendRequestRepositoryImpl
 import com.lnsergioantonio.restapp.ext.NetworkHandler
 
-class AppContainer(private val app: Application) {
+class AppContainer(app: Application) {
     private val database = provideDatabase(app)
     private val dao = provideRequestResponseDao(database)
 

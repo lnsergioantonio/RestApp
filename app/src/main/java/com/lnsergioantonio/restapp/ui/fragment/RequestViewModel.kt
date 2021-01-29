@@ -10,14 +10,9 @@ import com.lnsergioantonio.restapp.domain.base.State
 class RequestViewModel(private val sendRequestUseCase: SendRequestUseCase) : ViewModel() {
 
     private val liveDataRequest = MutableLiveData<Request>()
-    //val stateRequest: LiveData<Request> get() = liveDataRequest
 
     init {
         liveDataRequest.value = Request()
-    }
-
-    fun getHeaders(): Map<String, String>? {
-        return liveDataRequest.value?.headerList
     }
 
     fun sendRequest() {

@@ -15,7 +15,7 @@ data class RequestResponseEntity(
         val responseAt: String,
         val time: String,
         val statusCode: Int,
-        val size: Int,
+        val size: Long,
         val requestBody: String,
         val responseBody: String,
         val isSuccessful: Int,

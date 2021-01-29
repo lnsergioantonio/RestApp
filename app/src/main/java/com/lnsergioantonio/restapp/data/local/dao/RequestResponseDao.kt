@@ -27,13 +27,13 @@ interface RequestResponseDao {
                        responseAt: String,
                        time: String,
                        statusCode: Int,
-                       size: Int,
+                       size: Long,
                        responseBody: String,
                        isSuccessful: Int,
                        error: String)
 
     @Transaction
-    @Query("SELECT * FROM request_response")
+    @Query("SELECT * FROM request_response LIMIT 20")
     fun getAllFlow(): Flow<List<RequestResponseEntity>?>
 
 }

@@ -37,10 +37,13 @@ private fun Response<ResponseBody>.toDomain(): ResponseEntity {
     else
         error = errorBody()?.string() ?: ""
 
+    val sizeBody = body()?.contentLength()?:0
+
+    val size = if (sizeBody > 0) sizeBody/1024 else 0
     return ResponseEntity(
             statusCode = code(),
             time = "${resTime - reqTime} ms",
-            size = headers().size,
+            size = size,
             responseBody = rawResponseBody,
             isSuccessful = isSuccessful,
             error = error,

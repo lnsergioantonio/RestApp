@@ -19,7 +19,6 @@ import com.lnsergioantonio.restapp.ui.header.adapter.HeadersItem
 import kotlinx.android.synthetic.main.fragment_request.*
 
 class RequestFragment : Fragment() {
-    private val REQUEST_FRAGMENT = "REQUEST_FRAGMENT"
     private lateinit var viewModel: RequestViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -53,17 +52,6 @@ class RequestFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        /*val database = provideDatabase(requireActivity().application)
-        val dao = provideRequestResponseDao(database)
-
-        val apiService = createNetworkClient(BuildConfig.DEBUG).create(AppService::class.java)
-        val networkHandler = NetworkHandler(requireContext())
-        val networkSource = NetworkSourceImpl(apiService)
-
-        val repository = SendRequestRepositoryImpl(networkHandler, networkSource, dao)
-        val useCase = SendRequestUseCase(repository)
-
-        viewModel = RequestViewModel(useCase)*/
         val appContainer = (requireActivity().application as App).appContainer
         viewModel = RequestContainer(appContainer.sendRequestRepository).viewModel
     }
@@ -73,7 +61,7 @@ class RequestFragment : Fragment() {
         val intent = Intent(requireActivity(), AddHeadersActivity::class.java)
 
         intent.putParcelableArrayListExtra(HEADERS_LIST, headersItems)
-        startActivityForResult(intent,RESULT_HEADERS_LIST)
+        startActivityForResult(intent, RESULT_HEADERS_LIST)
         requireActivity().overridePendingTransition(R.transition.push_down_in, R.transition.push_down_out)
     }
 

@@ -3,6 +3,7 @@ package com.lnsergioantonio.restapp.ui.fragment.adapter
 import com.lnsergioantonio.restapp.domain.model.ResponseEntity
 
 data class ResponseItem(
+        val id: Int = 0,
         val description: String,
         val method: String,
         val uri: String,
@@ -17,6 +18,7 @@ data class ResponseItem(
 fun List<ResponseEntity>.toItems(): List<ResponseItem> {
     return map {
         ResponseItem(
+                id = 0,
                 description = it.description,
                 method = it.method,
                 uri = it.url,

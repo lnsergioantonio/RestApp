@@ -1,7 +1,7 @@
 package com.lnsergioantonio.restapp.domain
 
-import com.lnsergioantonio.restapp.data.AppService
-import com.lnsergioantonio.restapp.data.RequestEntity
+import com.lnsergioantonio.restapp.data.network.AppService
+import com.lnsergioantonio.restapp.domain.model.RequestEntity
 import com.lnsergioantonio.restapp.domain.model.ResponseEntity
 import okhttp3.ResponseBody
 import retrofit2.Response

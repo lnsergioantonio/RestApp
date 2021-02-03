@@ -1,6 +1,6 @@
 package com.lnsergioantonio.restapp.domain
 
-import com.lnsergioantonio.restapp.data.RequestEntity
+import com.lnsergioantonio.restapp.domain.model.RequestEntity
 import com.lnsergioantonio.restapp.data.local.dao.RequestResponseDao
 import com.lnsergioantonio.restapp.data.local.entitues.RequestResponseEntity
 import com.lnsergioantonio.restapp.domain.base.NetworkConnectionException

@@ -2,8 +2,8 @@ package com.lnsergioantonio.restapp.di
 
 import android.app.Application
 import com.lnsergioantonio.restapp.BuildConfig
-import com.lnsergioantonio.restapp.data.AppService
-import com.lnsergioantonio.restapp.data.createNetworkClient
+import com.lnsergioantonio.restapp.data.network.AppService
+import com.lnsergioantonio.restapp.data.network.createNetworkClient
 import com.lnsergioantonio.restapp.data.local.provideDatabase
 import com.lnsergioantonio.restapp.data.local.provideRequestResponseDao
 import com.lnsergioantonio.restapp.domain.GetResponseRepositoryImpl

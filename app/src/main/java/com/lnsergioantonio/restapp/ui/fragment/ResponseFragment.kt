@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.lnsergioantonio.restapp.App
 import com.lnsergioantonio.restapp.R
 import com.lnsergioantonio.restapp.di.ResponseContainer
@@ -48,6 +50,16 @@ class ResponseFragment : Fragment() {
     private fun initRecyclerview() {
         adapter = ResponseAdapter()
         responseList.adapter = adapter
+        responseList.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val manager = responseList.layoutManager as LinearLayoutManager
+                val lastPosition = manager.findLastVisibleItemPosition()
+                if (lastPosition == (adapter.itemCount - 1)){
+                    viewModel.getResponse()
+                }
+            }
+        })
     }
 
     private fun initObservers() {
@@ -63,7 +75,7 @@ class ResponseFragment : Fragment() {
     private fun onChangeResponseList(stateResponseList: State<List<ResponseEntity>>?) {
         stateResponseList?.let {noNullStateResponseList ->
             when(noNullStateResponseList){
-                is State.Success -> adapter.setResponseList(noNullStateResponseList.data.toItems())
+                is State.Success -> adapter.submitList(noNullStateResponseList.data.toItems())
                 is State.Failure -> Log.e("ERROR -> ", noNullStateResponseList.message)
                 is State.Progress -> Log.e("Progress -> ", "... ")
             }

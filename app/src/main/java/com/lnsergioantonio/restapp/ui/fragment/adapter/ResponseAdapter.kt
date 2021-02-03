@@ -2,18 +2,14 @@ package com.lnsergioantonio.restapp.ui.fragment.adapter
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.lnsergioantonio.restapp.R
 import com.lnsergioantonio.restapp.ext.inflate
 import kotlinx.android.synthetic.main.item_response.view.*
 
-class ResponseAdapter : RecyclerView.Adapter<ResponseHolder>(){
-    private var responseList : List<ResponseItem> = emptyList()
-
-    fun setResponseList(list: List<ResponseItem>){
-        responseList = list
-        notifyDataSetChanged()
-    }
+class ResponseAdapter : ListAdapter<ResponseItem, ResponseHolder>(DiffUtilCallback){ // RecyclerView.Adapter<ResponseHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResponseHolder {
         val view = parent.inflate(R.layout.item_response)
@@ -21,10 +17,10 @@ class ResponseAdapter : RecyclerView.Adapter<ResponseHolder>(){
     }
 
     override fun onBindViewHolder(holder: ResponseHolder, position: Int) {
-        holder.renderView(responseList[position])
+        val responseItem = getItem(position)
+        holder.renderView(responseItem)
     }
 
-    override fun getItemCount(): Int = responseList.size
 }
 
 class ResponseHolder(view: View): RecyclerView.ViewHolder(view){
@@ -38,4 +34,13 @@ class ResponseHolder(view: View): RecyclerView.ViewHolder(view){
             labelUri.text = response.uri
         }
     }
+}
+
+private object DiffUtilCallback : DiffUtil.ItemCallback<ResponseItem>(){
+    override fun areItemsTheSame(oldItem: ResponseItem, newItem: ResponseItem): Boolean =
+            oldItem.uri == newItem.uri
+
+    override fun areContentsTheSame(oldItem: ResponseItem, newItem: ResponseItem): Boolean =
+        oldItem == newItem
+
 }

@@ -1,4 +1,4 @@
-package com.lnsergioantonio.restapp.data
+package com.lnsergioantonio.restapp.data.network
 
 import okhttp3.RequestBody
 import okhttp3.ResponseBody

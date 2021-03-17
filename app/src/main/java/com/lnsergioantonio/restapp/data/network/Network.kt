@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
-private const val timeOut = 20L //20Secs//
+private const val timeOut = 120L //20Secs//
 
 fun createNetworkClient(debug: Boolean = false) =
     retrofitClient(

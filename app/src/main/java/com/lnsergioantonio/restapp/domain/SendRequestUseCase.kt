@@ -3,7 +3,9 @@ package com.lnsergioantonio.restapp.domain
 import com.lnsergioantonio.restapp.domain.base.State
 import com.lnsergioantonio.restapp.domain.model.ResponseEntity
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class SendRequestUseCase(private val repository: SendRequestRepository) {
@@ -13,21 +15,29 @@ class SendRequestUseCase(private val repository: SendRequestRepository) {
             onResult: (MutableList<State<ResponseEntity>>) -> Unit = {}
     ) {
         val callFromApi = mutableListOf<State<ResponseEntity>>()
-        scope.launch {
-            val jobs = Array(params.numberCalls) {
-                scope.async {
-                    run(params)
+        val jobs: Array<Flow<State<ResponseEntity>>> = Array(params.numberCalls) {
+            run(params)
+        }
+
+        jobs.forEachIndexed { index, flow ->
+            scope.launch {
+                flow.collect { emittedElement ->
+                    callFromApi.add(emittedElement)
+                    onResult(callFromApi)
                 }
             }
-            jobs.forEach {
-                callFromApi.add(it.await())
-            }
-            onResult(callFromApi)
         }
     }
 
-    private suspend fun run(params: Params): State<ResponseEntity> {
-        return repository.fetchData(params.headerList, params.url, params.method, params.body, params.bodyType)
+    private fun run(params: Params): Flow<State<ResponseEntity>> {
+        return flow {
+            val result = repository.fetchData(params.headerList, params.url, params.method, params.body, params.bodyType)
+            emit(result)
+        }.onStart {
+            emit(State.Progress(true))
+        }.catch {
+            emit(State.Failure(it))
+        }
     }
 
     data class Params(

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.lnsergioantonio.restapp.App
 import com.lnsergioantonio.restapp.R
 import com.lnsergioantonio.restapp.di.RequestContainer
@@ -23,7 +24,7 @@ import kotlinx.android.synthetic.main.fragment_request.*
 class RequestFragment : Fragment() {
     private var headersItems: ArrayList<HeadersItem> = arrayListOf()
     private lateinit var viewModel: RequestViewModel
-    private var numberCalls: Int = 0
+    private var numberCalls: Int = 1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_request, container, false)
@@ -35,6 +36,18 @@ class RequestFragment : Fragment() {
         initViewModel()
         initObservers()
         initListeners()
+        toggleProgress(false)
+    }
+
+    private fun toggleProgress(isShow:Boolean) {
+        if (isShow){
+            progressBar.visibility = View.VISIBLE
+            labelProgress.visibility = View.VISIBLE
+        }else{
+            progressBar.visibility = View.INVISIBLE
+            labelProgress.visibility = View.INVISIBLE
+        }
+
     }
 
     private fun initListeners() {
@@ -56,7 +69,9 @@ class RequestFragment : Fragment() {
         }
 
         buttonSend.setOnClickListener {
-            numberCalls = inputNumber.value.toIntOrNull() ?: 0
+            toggleProgress(true)
+            numberCalls = inputNumber.value.toIntOrNull() ?: 1
+            numberCalls = if (numberCalls == 0) 1 else numberCalls
             viewModel.setRequestUrl(inputUrl.value, inputNumber.value)
             viewModel.sendRequest()
             initSubmitViews()
@@ -89,14 +104,17 @@ class RequestFragment : Fragment() {
         resultList?.let { noNullResult ->
             noNullResult.count {
                 when (it) {
-                    is State.Failure -> true
+                    is State.Failure -> {
+                        Toast.makeText(requireContext(),it.message,Toast.LENGTH_LONG)
+                        true
+                    }
                     is State.Progress -> false
                     is State.Success -> true
                 }
             }.let { responseCompleted ->
                 progressBar.progress = responseCompleted
                 buttonSend.isEnabled = responseCompleted == numberCalls
-                labelProgress.text = String.format("%s / %s", numberCalls, responseCompleted)
+                labelProgress.text = String.format("%s / %s", responseCompleted, numberCalls)
             }
         }
     }

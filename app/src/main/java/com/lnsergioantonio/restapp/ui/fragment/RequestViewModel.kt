@@ -34,7 +34,7 @@ class RequestViewModel(private val sendRequestUseCase: SendRequestUseCase) : Vie
         liveDataRequest.value?.apply {
             addHeader(key, value)
         }?.let {
-            liveDataRequest.postValue(it)
+            liveDataRequest.value = it
         }
     }
 
@@ -42,7 +42,7 @@ class RequestViewModel(private val sendRequestUseCase: SendRequestUseCase) : Vie
         liveDataRequest.value?.apply {
             headerList.clear()
         }?.let {
-            liveDataRequest.postValue(it)
+            liveDataRequest.value = it
         }
     }
 
@@ -81,6 +81,7 @@ class RequestViewModel(private val sendRequestUseCase: SendRequestUseCase) : Vie
             var numberCalls: Int = 1
     ) {
         fun getParam(): SendRequestUseCase.Params {
+            headerList["User-Agent"] = "Android/RestApp"
             return SendRequestUseCase.Params(headerList, url, method, body, bodyType, numberCalls)
         }
 

@@ -2,7 +2,7 @@ package com.lnsergioantonio.restapp.di
 
 import com.lnsergioantonio.restapp.domain.SendRequestRepository
 import com.lnsergioantonio.restapp.domain.SendRequestUseCase
-import com.lnsergioantonio.restapp.ui.fragment.RequestViewModel
+import com.lnsergioantonio.restapp.ui.home.fragment.RequestViewModel
 
 class RequestContainer(repository: SendRequestRepository) {
     private val useCase = SendRequestUseCase(repository)

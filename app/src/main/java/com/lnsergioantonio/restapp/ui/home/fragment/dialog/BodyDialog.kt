@@ -1,4 +1,4 @@
-package com.lnsergioantonio.restapp.ui.fragment.dialog
+package com.lnsergioantonio.restapp.ui.home.fragment.dialog
 
 import android.app.Dialog
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.lnsergioantonio.restapp.ui.fragment
+package com.lnsergioantonio.restapp.ui.home.fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lnsergioantonio.restapp.App
@@ -14,8 +13,10 @@ import com.lnsergioantonio.restapp.R
 import com.lnsergioantonio.restapp.di.ResponseContainer
 import com.lnsergioantonio.restapp.domain.base.State
 import com.lnsergioantonio.restapp.domain.model.ResponseEntity
-import com.lnsergioantonio.restapp.ui.fragment.adapter.ResponseAdapter
-import com.lnsergioantonio.restapp.ui.fragment.adapter.toItems
+import com.lnsergioantonio.restapp.ext.launchActivity
+import com.lnsergioantonio.restapp.ui.home.fragment.adapter.ResponseAdapter
+import com.lnsergioantonio.restapp.ui.home.fragment.adapter.toItems
+import com.lnsergioantonio.restapp.ui.response.ResponseDetailActivity
 import kotlinx.android.synthetic.main.fragment_response.*
 
 class ResponseFragment : Fragment() {
@@ -49,6 +50,10 @@ class ResponseFragment : Fragment() {
 
     private fun initRecyclerview() {
         adapter = ResponseAdapter()
+        adapter.setOnClickItem { id ->
+            requireContext().launchActivity<ResponseDetailActivity>()
+        }
+
         responseList.adapter = adapter
         responseList.addOnScrollListener(object : RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -63,7 +68,7 @@ class ResponseFragment : Fragment() {
     }
 
     private fun initObservers() {
-        viewModel.responseState.observe(viewLifecycleOwner, Observer {
+        viewModel.responseState.observe(viewLifecycleOwner, {
             onChangeResponseList(it)
         })
     }

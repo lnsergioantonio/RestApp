@@ -43,4 +43,12 @@
     <string name="number_multiple_requests">Number of requests</string>
     <string name="response">Response</string>
 
+    <string name="response_adapter_label_code">Code: %d</string>
+    <string name="response_adapter_label_time">Time: %s</string>
+    <string name="response_adapter_label_size">%x kb</string>
+
+    <string name="response_body">Body</string>
+    <string name="response_header">Headers</string>
+    <string name="response_activity">Response details</string>
+
 </resources>

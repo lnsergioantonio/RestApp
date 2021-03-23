@@ -21,7 +21,7 @@ interface SendRequestRepository {
             bodyType: String
     ): State<ResponseEntity>
 }
-
+// https://jsonplaceholder.typicode.com/todos/1
 class SendRequestRepositoryImpl(
         private val networkHandler: NetworkHandler,
         private val networkSource: NetworkSource,

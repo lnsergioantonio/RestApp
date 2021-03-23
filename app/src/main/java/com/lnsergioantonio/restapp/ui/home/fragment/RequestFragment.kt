@@ -1,4 +1,4 @@
-package com.lnsergioantonio.restapp.ui.fragment
+package com.lnsergioantonio.restapp.ui.home.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,7 +14,7 @@ import com.lnsergioantonio.restapp.domain.base.State
 import com.lnsergioantonio.restapp.domain.model.ResponseEntity
 import com.lnsergioantonio.restapp.ext.onItemSelectedChanged
 import com.lnsergioantonio.restapp.ext.value
-import com.lnsergioantonio.restapp.ui.fragment.dialog.*
+import com.lnsergioantonio.restapp.ui.home.fragment.dialog.*
 import com.lnsergioantonio.restapp.ui.header.AddHeadersActivity
 import com.lnsergioantonio.restapp.ui.header.HEADERS_LIST
 import com.lnsergioantonio.restapp.ui.header.RESULT_HEADERS_LIST

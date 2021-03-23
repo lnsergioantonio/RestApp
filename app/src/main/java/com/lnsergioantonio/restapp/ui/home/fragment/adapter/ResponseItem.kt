@@ -1,4 +1,4 @@
-package com.lnsergioantonio.restapp.ui.fragment.adapter
+package com.lnsergioantonio.restapp.ui.home.fragment.adapter
 
 import com.lnsergioantonio.restapp.domain.model.ResponseEntity
 

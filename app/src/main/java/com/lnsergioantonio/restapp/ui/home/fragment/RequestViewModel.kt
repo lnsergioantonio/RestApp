@@ -1,4 +1,4 @@
-package com.lnsergioantonio.restapp.ui.fragment
+package com.lnsergioantonio.restapp.ui.home.fragment
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

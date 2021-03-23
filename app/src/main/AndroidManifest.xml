@@ -13,10 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RestApp">
+        <activity android:name=".ui.response.ResponseDetailActivity"></activity>
         <activity
             android:name=".ui.header.AddHeadersActivity"
-            android:label="@string/title_activity_add_headers"></activity>
-        <activity android:name=".MainActivity">
+            android:label="@string/title_activity_add_headers" />
+        <activity android:name=".ui.home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

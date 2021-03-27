@@ -19,7 +19,11 @@ class ResponseDetailActivity : AppCompatActivity() {
 
     private fun initToolbar() {
         setSupportActionBar(toolbar)
-        supportActionBar?.setTitle(R.string.response_activity)
+        supportActionBar?.apply {
+            setTitle(R.string.response_activity)
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
+        }
     }
 
     private fun initPager() {

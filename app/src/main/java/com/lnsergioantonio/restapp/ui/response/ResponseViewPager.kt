@@ -17,9 +17,9 @@ class ResponseViewPager(fragment: FragmentActivity) : FragmentStateAdapter(fragm
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             RESPONSE_BODY ->
-                ResponseBodyFragment.newInstance("","")
+                ResponseBodyFragment.newInstance("")
             else ->
-                ResponseHeadersFragment.newInstance("","")
+                ResponseHeadersFragment.newInstance(HashMap())
         }
     }
 }

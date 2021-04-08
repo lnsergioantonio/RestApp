@@ -1,11 +1,12 @@
 package com.lnsergioantonio.restapp.ui.response
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.lnsergioantonio.restapp.R
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_response_detail.*
 
 private const val DEFAULT_POSITION = 0
 
@@ -27,7 +28,7 @@ class ResponseDetailActivity : AppCompatActivity() {
     }
 
     private fun initPager() {
-        viewPager.adapter = ResponseViewPager(this)
+        viewPager.adapter = ResponseViewPager(this, "", HashMap())
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tabConfiguration(tab, position)
@@ -41,4 +42,12 @@ class ResponseDetailActivity : AppCompatActivity() {
             tab.text = getString(R.string.response_header)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }

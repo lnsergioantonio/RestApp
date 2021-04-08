@@ -1,4 +1,4 @@
-package com.lnsergioantonio.restapp.domain
+package com.lnsergioantonio.restapp.domain.network
 
 import com.lnsergioantonio.restapp.domain.model.RequestEntity
 import com.lnsergioantonio.restapp.data.local.dao.RequestResponseDao
@@ -76,9 +76,9 @@ class SendRequestRepositoryImpl(
     private fun getRequestBody(body: String, bodyType: String): RequestBody {
         return when (bodyType) {
             JSON ->
-                body.toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
+                body.toRequestBody(MEDIA_TYPE_JSON)
             else ->
-                body.toRequestBody("text/plain; charset=utf-8".toMediaTypeOrNull())
+                body.toRequestBody(MEDIA_TYPE_TEXT)
         }
     }
 }
@@ -104,3 +104,5 @@ private fun RequestEntity.toEntity(): RequestResponseEntity {
 
 const val JSON = "JSON"
 const val TEXT = "Text"
+val MEDIA_TYPE_JSON = "application/json; charset=utf-8".toMediaTypeOrNull()
+val MEDIA_TYPE_TEXT = "text/plain; charset=utf-8".toMediaTypeOrNull()

@@ -1,10 +1,8 @@
-package com.lnsergioantonio.restapp.domain
+package com.lnsergioantonio.restapp.domain.network
 
 import com.lnsergioantonio.restapp.domain.base.State
 import com.lnsergioantonio.restapp.domain.model.ResponseEntity
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 

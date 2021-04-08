@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lnsergioantonio.restapp.domain.SendRequestUseCase
+import com.lnsergioantonio.restapp.domain.network.SendRequestUseCase
 import com.lnsergioantonio.restapp.domain.base.State
 import com.lnsergioantonio.restapp.domain.model.ResponseEntity
 import com.lnsergioantonio.restapp.ui.header.adapter.HeadersItem

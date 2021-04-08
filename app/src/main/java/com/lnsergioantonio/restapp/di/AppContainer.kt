@@ -7,8 +7,8 @@ import com.lnsergioantonio.restapp.data.network.createNetworkClient
 import com.lnsergioantonio.restapp.data.local.provideDatabase
 import com.lnsergioantonio.restapp.data.local.provideRequestResponseDao
 import com.lnsergioantonio.restapp.domain.GetResponseRepositoryImpl
-import com.lnsergioantonio.restapp.domain.NetworkSourceImpl
-import com.lnsergioantonio.restapp.domain.SendRequestRepositoryImpl
+import com.lnsergioantonio.restapp.domain.network.NetworkSourceImpl
+import com.lnsergioantonio.restapp.domain.network.SendRequestRepositoryImpl
 import com.lnsergioantonio.restapp.ext.NetworkHandler
 
 class AppContainer(app: Application) {

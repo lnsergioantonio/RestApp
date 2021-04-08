@@ -33,7 +33,7 @@ interface RequestResponseDao {
                        error: String)
 
     @Transaction
-    @Query("SELECT * FROM request_response ORDER BY id ASC LIMIT 10")
+    @Query("SELECT * FROM request_response ORDER BY id DESC LIMIT 10")
     fun getAllFlow(): Flow<List<RequestResponseEntity>?>
 
 }

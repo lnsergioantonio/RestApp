@@ -1,4 +1,4 @@
-package com.lnsergioantonio.restapp.domain
+package com.lnsergioantonio.restapp.domain.network
 
 import com.lnsergioantonio.restapp.data.network.AppService
 import com.lnsergioantonio.restapp.domain.model.RequestEntity

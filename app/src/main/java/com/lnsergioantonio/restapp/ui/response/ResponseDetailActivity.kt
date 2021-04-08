@@ -9,13 +9,24 @@ import com.lnsergioantonio.restapp.R
 import kotlinx.android.synthetic.main.activity_response_detail.*
 
 private const val DEFAULT_POSITION = 0
+const val ARG_RESPONSE_BODY = "BODY"
+const val ARG_RESPONSE_HEADERS = "HEADERS"
 
 class ResponseDetailActivity : AppCompatActivity() {
+    private var body: String? = "Empty body"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_response_detail)
         initToolbar()
+        initExtras()
         initPager()
+    }
+
+    private fun initExtras() {
+        intent.extras?.let { bundle ->
+            body = bundle.getString(ARG_RESPONSE_BODY)
+        }
     }
 
     private fun initToolbar() {
@@ -28,7 +39,7 @@ class ResponseDetailActivity : AppCompatActivity() {
     }
 
     private fun initPager() {
-        viewPager.adapter = ResponseViewPager(this, "", HashMap())
+        viewPager.adapter = ResponseViewPager(this, body, HashMap())
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tabConfiguration(tab, position)

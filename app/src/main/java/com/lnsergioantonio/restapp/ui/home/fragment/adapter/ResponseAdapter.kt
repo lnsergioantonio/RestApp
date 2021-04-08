@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.item_response.view.*
 class ResponseAdapter :
     ListAdapter<ResponseItem, ResponseHolder>(DiffUtilCallback) { // RecyclerView.Adapter<ResponseHolder>(){
 
-    private var listener: (id: Int) -> Unit = {}
+    private var listener: (item: ResponseItem) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResponseHolder {
         val view = parent.inflate(R.layout.item_response)
@@ -23,10 +23,10 @@ class ResponseAdapter :
     override fun onBindViewHolder(holder: ResponseHolder, position: Int) {
         val responseItem = getItem(position)
         holder.renderView(responseItem)
-        holder.setClickItem(responseItem.id, listener)
+        holder.setClickItem(responseItem, listener)
     }
 
-    fun setOnClickItem(listener: (id: Int) -> Unit) {
+    fun setOnClickItem(listener: (item: ResponseItem) -> Unit) {
         this.listener = listener
     }
 
@@ -53,8 +53,8 @@ class ResponseHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
     }
 
-    fun setClickItem(id: Int, listener: (id: Int) -> Unit) {
-        itemView.setOnClickListener { listener.invoke(id) }
+    fun setClickItem(item: ResponseItem, listener: (item: ResponseItem) -> Unit) {
+        itemView.setOnClickListener { listener.invoke(item) }
     }
 }
 

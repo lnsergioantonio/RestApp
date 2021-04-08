@@ -16,6 +16,8 @@ import com.lnsergioantonio.restapp.domain.model.ResponseEntity
 import com.lnsergioantonio.restapp.ext.launchActivity
 import com.lnsergioantonio.restapp.ui.home.fragment.adapter.ResponseAdapter
 import com.lnsergioantonio.restapp.ui.home.fragment.adapter.toItems
+import com.lnsergioantonio.restapp.ui.response.ARG_RESPONSE_BODY
+import com.lnsergioantonio.restapp.ui.response.ARG_RESPONSE_HEADERS
 import com.lnsergioantonio.restapp.ui.response.ResponseDetailActivity
 import kotlinx.android.synthetic.main.fragment_response.*
 
@@ -50,8 +52,11 @@ class ResponseFragment : Fragment() {
 
     private fun initRecyclerview() {
         adapter = ResponseAdapter()
-        adapter.setOnClickItem { id ->
-            requireContext().launchActivity<ResponseDetailActivity>()
+        adapter.setOnClickItem { item ->
+            requireContext().launchActivity<ResponseDetailActivity> {
+                putExtra(ARG_RESPONSE_BODY,item.body)
+                //putExtra(ARG_RESPONSE_HEADERS,item.)
+            }
         }
 
         responseList.adapter = adapter

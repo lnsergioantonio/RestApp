@@ -10,7 +10,7 @@ private const val NUM_PAGES = 2
 const val RESPONSE_BODY = 0
 const val RESPONSE_HEADERS = 1
 
-class ResponseViewPager(fragment: FragmentActivity, val body: String, val headers: HashMap<String, String>) : FragmentStateAdapter(fragment) {
+class ResponseViewPager(fragment: FragmentActivity, val body: String?, val headers: HashMap<String, String>) : FragmentStateAdapter(fragment) {
 
     override fun getItemCount(): Int = NUM_PAGES
 
